@@ -1,5 +1,4 @@
-
-
+#palindrome checker
 
 
 word = str(input("Enter a word:"))
