@@ -1,8 +1,4 @@
-That's a fantastic idea. A README serves as your mission statement and constant reminder of your goals and rules.
 
-Here is a comprehensive README document for your 1.5-Month Python Foundation Bootcamp, ready to be copied into a file named `README.md` or a Word document.
-
----
 
 # 🐍 1.5-Month Python Foundation Bootcamp (Nov 26, 2025 – Jan 10, 2026)
 
