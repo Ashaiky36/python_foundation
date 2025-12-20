@@ -1,5 +1,6 @@
 #two sum leetcode problem
 
+#bruteforce method
 # nums = [2, 7, 11, 15]
 # target = 9
 
@@ -8,6 +9,8 @@
 #               if nums[i] + nums[j] == target]
 
 # print(target_sum[0])
+
+#optimal soultion
 nums = [2,7,11,19,21]
 target = 9
 
