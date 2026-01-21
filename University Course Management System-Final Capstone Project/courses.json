@@ -22,5 +22,11 @@
         "name": "Frontend Web Development",
         "instructor": "Ms. Interface",
         "capacity": 10
+    },
+    {
+        "id": "XXX234",
+        "name": "Test",
+        "instructor": "John Doe",
+        "capacity": "35"
     }
 ]
