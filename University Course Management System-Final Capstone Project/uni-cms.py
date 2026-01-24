@@ -43,7 +43,7 @@ class DataHandler:
 user_id = str(input("Enter your unique user id:"))
                                 
 class User:
-    def __init__(self, user_id, username, role):
+    def __init__(self, user_id, username = None, role = None):
         self.user_id = user_id
         self.username = username
         self.role = role
@@ -60,7 +60,7 @@ class User:
                         # c_name = str(input("Enter the course name:"))
                         # instructor = str(input("Enter the instructor name foe the course:"))
                         # capacity = int(input("Enter student capacity for this course:"))
-                        def __init__(self, c_id, c_name, instructor, capacity):
+                        def __init__(self, c_id = None, c_name = None, instructor = None, capacity = None):
                             self.c_id = c_id
                             self.c_name = c_name
                             self.instructor = instructor
@@ -81,32 +81,62 @@ class User:
 
                             DataHandler.save_data("courses.json", courses)
 
-                        # def delete_course(self):
-                        #     course_list = DataHandler.load_data("courses.json")
-                        #     # new_course_list = [course for course in course_list if course.get("id") != self.c_id]
-
-                        #     # DataHandler.save_data("courses.json", new_course_list)
-                        #     for course in course_list:
-                        #         if course["id"] == self.c_id:
-                        #             new_list = course_list.remove(course)
-                        #             break
-                        #     DataHandler.save_data("courses.json", new_list)
                         def delete_course(self):
-                            course_list = DataHandler.load_data("courses.json")  # keep filename consistent
-                            for course in course_list:
-                                if course["id"] == self.c_id:
-                                    course_list.remove(course)   # modifies in place
-                                    break                        # stop after deleting
-                            DataHandler.save_data("courses.json", course_list)   # save updated list
-        
+                            course_list = DataHandler.load_data("courses.json")
+                            new_course_list = [course for course in course_list if course.get("id") != self.c_id]
 
-                    c1 = Admin("XXX234")       
-                    c1.delete_course() 
+                            DataHandler.save_data("courses.json", new_course_list)
+                            # for course in course_list:
+                            #     if course["id"] == self.c_id:
+                            #         new_list = course_list.remove(course)
+                            #         break
+                            # DataHandler.save_data("courses.json", new_list)        
+                        
+                        def view_all_courses(self):
+                            course_list = DataHandler.load_data("courses.json")
+                            print(course_list)
+                    c1 = Admin()       
+                    c1.view_all_courses() 
 
 
-                else:
+                elif user["role"] == "student":
                     class Student(User):
-                        print("checking...........")     
+                        def __init__(self, c_id = None):
+                            self.c_id = c_id
+                            super().__init__(user_id)
+                            
+                        def view_all_courses(self):
+                            course_list = DataHandler.load_data("courses.json")
+                            print(course_list)
+
+                        def enroll_in_course(self):
+                            courses = DataHandler.load_data("courses.json")
+                            enrollments = DataHandler.load_data("enrollments.json")
+                            for course in courses:
+                                if course["id"] == self.c_id:
+                                    if user_id in enrollments:
+                                        enrollments[user_id].append(self.c_id)
+                                    else: 
+                                        enrollments[user_id] = [self.c_id]    
+                                        # enrollments.setdefault(user_id, [].append([self.c_id]))
+                                    DataHandler.save_data("enrollments.json", enrollments)
+                                    break
+
+                        def view_schedule(self):
+                            schedule = DataHandler.load_data("enrollments.json")
+                            schedule_details = DataHandler.load_data("courses.json")
+                            if user_id in schedule:
+                                for course_id in schedule[user_id]:
+                                    for course in schedule_details:
+                                        if course["id"] == course_id:
+                                            print(f"{course["id"]}, {course["name"]} , {course["instructor"]}")       
+
+                    d1 = Student()
+                    d1.view_schedule()
 
 
-User.login(user_id)                                        
+
+
+User.login(user_id)   
+
+class Course:
