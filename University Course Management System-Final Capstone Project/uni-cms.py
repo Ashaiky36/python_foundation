@@ -112,16 +112,25 @@ class User:
                         def enroll_in_course(self):
                             courses = DataHandler.load_data("courses.json")
                             enrollments = DataHandler.load_data("enrollments.json")
+                            count = sum( self.c_id in course_list for course_list in enrollments.values())
                             for course in courses:
                                 if course["id"] == self.c_id:
-                                    if user_id in enrollments:
-                                        enrollments[user_id].append(self.c_id)
-                                    else: 
-                                        enrollments[user_id] = [self.c_id]    
-                                        # enrollments.setdefault(user_id, [].append([self.c_id]))
-                                    DataHandler.save_data("enrollments.json", enrollments)
-                                    break
+                                    capacity = course["capacity"]
+                                    if count < capacity:
+                                        for course in courses:
+                                            if course["id"] == self.c_id:
+                                                if user_id in enrollments:
+                                                    enrollments[user_id].append(self.c_id)
+                                                else: 
+                                                    enrollments[user_id] = [self.c_id]    
+                                                    # enrollments.setdefault(user_id, [].append([self.c_id]))
+                                                DataHandler.save_data("enrollments.json", enrollments)
+                                                break
+                                    else:
+                                        print("course is full")        
 
+                            
+                                    #need to implement course capacity limit           
                         def view_schedule(self):
                             schedule = DataHandler.load_data("enrollments.json")
                             schedule_details = DataHandler.load_data("courses.json")
@@ -131,12 +140,12 @@ class User:
                                         if course["id"] == course_id:
                                             print(f"{course["id"]}, {course["name"]} , {course["instructor"]}")       
 
-                    d1 = Student()
-                    d1.view_schedule()
+                    d1 = Student("MATH310")
+                    d1.enroll_in_course()
 
 
 
 
 User.login(user_id)   
 
-class Course:
+# class Course:
