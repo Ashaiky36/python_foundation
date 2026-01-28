@@ -10,8 +10,14 @@ class DataHandler:
                data = json.load(file)  
                return data   
 
-        except:
-            print("file does not exists")   
+        except json.JSONDecodeError as e:
+            print("Invalid JSON syntax:", e)
+
+        except FileNotFoundError:
+            print(f"File not found: {filename}")
+
+        except Exception as e:
+            print("Unexpected error:", e)   
 
     @staticmethod
     def save_data(filename, courses):
@@ -82,14 +88,17 @@ exit = enter 4""")
 
                         def delete_course(self):
                             course_list = DataHandler.load_data("courses.json")
-                            new_course_list = [course for course in course_list if course.get("id") != self.c_id]
+                            try:
+                                new_course_list = [course for course in course_list if course.get("id") != self.c_id]
 
-                            DataHandler.save_data("courses.json", new_course_list)
-                            # for course in course_list:
-                            #     if course["id"] == self.c_id:
-                            #         new_list = course_list.remove(course)
-                            #         break
-                            # DataHandler.save_data("courses.json", new_list)        
+                                DataHandler.save_data("courses.json", new_course_list)
+                                # for course in course_list:
+                                #     if course["id"] == self.c_id:
+                                #         new_list = course_list.remove(course)
+                                #         break
+                                # DataHandler.save_data("courses.json", new_list)  
+                            except:
+                                print("Invalid course id. course not found error.")      
                         
                         def view_all_courses(self):
                             course_list = DataHandler.load_data("courses.json")
@@ -102,7 +111,10 @@ exit = enter 4""")
                                 c_id = str(input("course id:"))
                                 c_name = str(input("course name:"))        
                                 c_instructor = str(input("course's instructor name:"))
-                                c_capacity = int(input("maximum course capacity:"))
+                                try:
+                                    c_capacity = int(input("maximum course capacity:"))
+                                except:
+                                    print("value error. capacity can only be an integer")
                                 acc_1 = Admin(c_id, c_name, c_instructor, c_capacity)       
                                 acc_1.create_course() 
 
@@ -193,12 +205,12 @@ exit = enter 4""")
 
                         else:
                                 print("enter a valid option")                         
-
+            else:
+                print("User not found. user does not exists or invalid user id")
                    
 
 
 
 
-User.login(user_id)   
-
-# class Course:
+current_user = User(user_id)
+current_user.login()   
