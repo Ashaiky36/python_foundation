@@ -1,0 +1,29 @@
+[
+    {
+        "id": "A101",
+        "username": "admin_main",
+        "password": "adminpass",
+        "role": "admin"
+    },
+    {
+        "id": "S2001",
+        "username": "alice_s",
+        "password": "alicespass",
+        "role": "student",
+        "name": "Alice Smith"
+    },
+    {
+        "id": "S2002",
+        "username": "bob_s",
+        "password": "bobspass",
+        "role": "student",
+        "name": "Bob Johnson"
+    },
+    {
+        "id": "S2003",
+        "username": "chloe_s",
+        "password": "chloespass",
+        "role": "student",
+        "name": "Chloe Davis"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "id": "CS101",
+        "name": "Introduction to Python",
+        "instructor": "Dr. Python",
+        "capacity": 30
+    },
+    {
+        "id": "DB205",
+        "name": "SQL and Database Management",
+        "instructor": "Prof. Data",
+        "capacity": 15
+    },
+    {
+        "id": "MATH310",
+        "name": "Discrete Mathematics",
+        "instructor": "Dr. Logic",
+        "capacity": 25
+    },
+    {
+        "id": "WEB150",
+        "name": "Frontend Web Development",
+        "instructor": "Ms. Interface",
+        "capacity": 10
+    },
+    {
+        "id": "x0001",
+        "name": "test",
+        "instructor": "tester",
+        "capacity": 1
+    }
+]
