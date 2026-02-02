@@ -58,7 +58,8 @@ admin features:
 create course = enter 1
 delete course = enter 2
 view all courses = enter 3
-exit = enter 4""")
+view all students = enter 4
+exit = enter 5 """)
                    
                     class Admin(User):
                         # c_id = str(input("Enter a unique id for the course:"))
@@ -104,6 +105,12 @@ exit = enter 4""")
                             course_list = DataHandler.load_data("courses.json")
                             print(course_list)
 
+                        def view_all_students(self):
+                            users = DataHandler.load_data("users.json")
+                            for user in users:
+                                if user["role"] == "student":
+                                    print(user["name"]) 
+
                     while True:
                         
                          admin_option = int(input("select feature:"))
@@ -128,9 +135,13 @@ exit = enter 4""")
                                 vac_1.view_all_courses()
 
                          elif admin_option == 4:
+                                vas_1 = Admin()
+                                vas_1.view_all_students()
+
+                         elif admin_option == 5:
                              print("logging off......")
                              print("exiting......")  
-                             break     
+                             break        
 
                          else:
                                 print("enter a valid option")           

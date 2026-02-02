@@ -28,7 +28,7 @@ class CoffeeMachine:
     INITIAL_RESOURCES = {
     "water": 1000,  # ml
     "milk": 500,   # ml
-    "coffee": 150, # g
+    "coffee": 200, # g
 }
     def __init__(self, drink_name, money):
         self.drink_name = drink_name
@@ -43,6 +43,7 @@ class CoffeeMachine:
                 
             else:
                 print("insufficient resources. add stock")
+                break
 
     def handle_payment(self):
             cost = MENU[self.drink_name]["cost"]
@@ -50,7 +51,9 @@ class CoffeeMachine:
             if change >= 0:    
                 print(f"here is your change = {change}")
             else:
-                print("Insufficient money. the coffee costs more than you paid") 
+                print(f"Insufficient money. the coffee costs more than you paid. refunding = {self.money}")
+                return False
+                 
                 
             
 
@@ -71,12 +74,20 @@ class CoffeeMachine:
 
     def process(self):
         print("Hi. How may I help you!")
+
         self.check_resources()
-        self.handle_payment()
+
+        self.handle_payment()  
+
         self.make_coffee()
+
         print("making your coffee with love")
+
         print(f"here's your {self.drink_name}")
+
         print("Have a good day, Thank you and visit again")
+
+    
 
 
 
